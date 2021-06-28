@@ -51,9 +51,6 @@ function BuyScreen:on_enter(from, level, units, passives, shop_level, shop_xp)
   if self.level == 1 then
   end
 
-  steam.friends.setRichPresence('steam_display', '#StatusFull')
-  steam.friends.setRichPresence('text', 'Shop - Level ' .. self.level)
-
   self.main = Group()
   self.effects = Group()
   self.ui = Group()
@@ -400,62 +397,6 @@ function BuyScreen:set_items()
     table.insert(self.items, ItemCard{group = self.main, x = 45 + (i-1)*60, y = y + (j-1)*50, w = 40, h = 50, passive = passive.passive , level = passive.level, xp = passive.xp, parent = self})
   end
 end
-
-
-
-
-SteamFollowButton = Object:extend()
-SteamFollowButton:implement(GameObject)
-function SteamFollowButton:init(args)
-  self:init_game_object(args)
-  self.interact_with_mouse = true
-  self.shape = Rectangle(self.x, self.y, pixul_font:get_text_width('follow me on steam!') + 12, pixul_font.h + 4)
-  self.text = Text({{text = '[greenm5]follow me on steam!', font = pixul_font, alignment = 'center'}}, global_text_tags)
-end
-
-
-function SteamFollowButton:update(dt)
-  self:update_game_object(dt)
-  if main.current.in_credits then return end
-
-  if self.selected and input.m1.pressed then
-    ui_switch2:play{pitch = random:float(0.95, 1.05), volume = 0.5}
-    self.spring:pull(0.2, 200, 10)
-    self.selected = true
-    ui_switch1:play{pitch = random:float(0.95, 1.05), volume = 0.5}
-    system.open_url'https://store.steampowered.com/dev/a327ex/'
-  end
-end
-
-
-function SteamFollowButton:draw()
-  graphics.push(self.x, self.y, 0, self.spring.x, self.spring.y)
-    graphics.rectangle(self.x, self.y, self.shape.w, self.shape.h, 4, 4, self.selected and fg[0] or green[0])
-    self.text:draw(self.x, self.y)
-  graphics.pop()
-end
-
-
-function SteamFollowButton:on_mouse_enter()
-  if main.current.in_credits then return end
-  love.mouse.setCursor(love.mouse.getSystemCursor'hand')
-  ui_hover1:play{pitch = random:float(1.3, 1.5), volume = 0.5}
-  pop2:play{pitch = random:float(0.95, 1.05), volume = 0.5}
-  self.selected = true
-  self.text:set_text{{text = '[fgm5]follow me on steam!', font = pixul_font, alignment = 'center'}}
-  self.spring:pull(0.05, 200, 10)
-end
-
-
-function SteamFollowButton:on_mouse_exit()
-  if main.current.in_credits then return end
-  love.mouse.setCursor()
-  self.text:set_text{{text = '[greenm5]follow me on steam!', font = pixul_font, alignment = 'center'}}
-  self.selected = false
-end
-
-
-
 
 WishlistButton = Object:extend()
 WishlistButton:implement(GameObject)

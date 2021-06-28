@@ -1526,7 +1526,6 @@ function init()
     'magnetism', 'insurance', 'dividends', 'haste', 'rearm', 
   }
 
-  steam.userStats.requestCurrentStats()
   new_game_plus = state.new_game_plus or 0
   if not state.new_game_plus then state.new_game_plus = new_game_plus end
   current_new_game_plus = state.current_new_game_plus or new_game_plus
@@ -1645,13 +1644,6 @@ function update(dt)
     state.sx, state.sy = sx, sy
     state.fullscreen = false
   end
-
-  --[[
-  if input.f11.pressed then
-    steam.userStats.resetAllStats(true)
-    steam.userStats.storeStats()
-  end
-  ]]--
 end
 
 
@@ -1879,7 +1871,6 @@ function open_options(self)
 
     self.quit_button = Button{group = self.ui, x = gw/2, y = gh - 25, force_update = true, button_text = 'quit', fg_color = 'bg10', bg_color = 'bg', action = function()
       system.save_state()
-      steam.shutdown()
       love.event.quit()
     end}
   end, 'pause')
