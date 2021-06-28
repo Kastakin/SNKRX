@@ -1,7 +1,3 @@
-
-
-
-
 # SNKRX
 
 [SNKRX](https://store.steampowered.com/app/915310/SNKRX/) is an arcade shooter roguelite where you control a snake of heroes that automatically attack nearby enemies.
@@ -11,9 +7,16 @@ https://user-images.githubusercontent.com/409773/119258159-ea982b00-bb9e-11eb-80
 
 [**Check it out on Steam!**](https://store.steampowered.com/app/915310/SNKRX/)
 
+### Modifications to the original version
+
+- no Steam dependency
+- no love binaries included
+
+The original version can be found here: https://github.com/a327ex/SNKRX
+
 ### Running
 
-Download this repository, `cd` into it and then run `engine/love/love.exe --console .`. You need to have Steam up to run it successfully.
+Download this repository, `cd` into it and then run `love .` Enjoy!
 
 ### LICENSE
 
